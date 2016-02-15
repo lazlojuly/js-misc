@@ -15,10 +15,10 @@ Node.prototype = {
 						done: true
 					};
 				} else {
-					let data = current.data;
+					let returnNode = current;
 					current = current.next;
 					return {
-						value: data
+						value: returnNode
 					};
 				}
 			}
@@ -29,7 +29,7 @@ Node.prototype = {
 function length(head) {
 	let length = 0;
 	if (head instanceof Node) {
-		for (let data of head) {
+		for (let node of head) {
 			length++;
 		}
 	}
@@ -39,8 +39,8 @@ function length(head) {
 function count(head, integer) {
 	let count = 0;
 	if (head instanceof Node) {
-		for (let data of head) {
-			if (data === integer) count++;
+		for (let node of head) {
+			if (node.data === integer) count++;
 		}
 	}
 	return count;
