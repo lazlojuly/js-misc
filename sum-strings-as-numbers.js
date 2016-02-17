@@ -8,7 +8,7 @@ function sumStrings(a,b) {
   b = b.split('').reverse().join('');
 
   let cursor = 0;
-  while (cursor < a.length || cursor < b.length) {
+  while (cursor < a.length || cursor < b.length || carry) {
     let total = parseNumString(a.charAt(cursor)) + parseNumString(b.charAt(cursor)) + carry;
     if (total > 9) {
       carry = 1;
@@ -20,7 +20,7 @@ function sumStrings(a,b) {
     cursor++;
   }
 
-  return sum.split('').reverse().join('');
+  return sum.split('').reverse().join('').replace(/^0+/g,'');
 
 }
 
@@ -29,18 +29,12 @@ function parseNumString(s) {
   return isNaN(n) ? 0 : n;
 }
 
-// var res1 = sumStrings('123', '123');
 var res1 = sumStrings('712569312664357328695151392', '8100824045303269669937');
-var res2 = sumStrings('800', '9567');
-// Expected: 712577413488402631964821329, instead got: 7.125774134884027e+26
-// 712577413488402631964821329
-// 7125774134884027e+26
+var res2 = sumStrings('800', '9567'); // 10367
+var res3 = sumStrings('00103', '08567') // Expected: 8670
+var res4 = sumStrings('50095301248058391139327916261', '81055900096023504197206408605'); // Expected: 131151201344081895336534324866
 
-// var num = 712577413488402631964821329;
-// var numString = num.toString();
-// console.log(numString);
 console.log(res1, 'result');
 console.log(res2, 'result2');
-
-// 712577413488402631964 - after 22
-
+console.log(res3, 'result3');
+console.log(res4, 'result4');
