@@ -9,45 +9,31 @@
 // 1666 uses each Roman symbol in descending order: MDCLXVI.
 "use strict";
 
-let symbols = {
-  1:'I',
-  5:'V',
-  10:'X',
-  50:'L',
-  100:'C',
-  500:'D',
-  1000:'M'
-};
+let symbols = [
+  { num: 1000, rom: 'M' },
+  { num: 500, rom: 'D' },
+  { num: 100, rom: 'C' },
+  { num: 50, rom: 'L' },
+  { num: 10, rom: 'X' },
+  { num: 5, rom: 'V' },
+  { num: 1, rom: 'I' }
+];
 
 function solution(n) {
 
   let result = [];
 
-  // iterate symbols
-  Object.keys(symbols).forEach(function(int) {
-    let symbol = symbols[int];
-      
+  symbols.forEach(function(symbol) {
+    let quotient = Math.floor(n/symbol.num);
+    if (quotient >= 1) {
+      result = result.concat(Array(quotient).fill(symbol.rom));
+      n = n - quotient*symbol.num;
+    }
   });
-
-  let thousands = n/1000;
-  let times = Math.floor(thousands);
-  if (thousands >= 1) {
-    result = result.concat(Array(times).fill(symbols[1000]));
-  }
-
-  n = n - (times*1000);
-
-  console.log(n, 'n');
-
-  let fivehundreds = n/500;
-  if (fivehundreds >= 1) {
-    result = result.concat(Array(Math.floor(fivehundreds)).fill(symbols[500]));
-  }
-
 
   return result.join('');
 }
 
-// console.log(solution(1990), 'MCMXC');
-// console.log(solution(2008), 'MMVIII');
+console.log(solution(1990), 'MCMXC');
+console.log(solution(2008), 'MMVIII');
 console.log(solution(1666), 'MDCLXVI');
