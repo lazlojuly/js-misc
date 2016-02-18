@@ -38,3 +38,29 @@ console.log(res1, 'result');
 console.log(res2, 'result2');
 console.log(res3, 'result3');
 console.log(res4, 'result4');
+
+// Why is this needed? .replace(/^0+/g,'')
+// Because both `a` and `b` can be `0`(zero) padded integers eg.: `08567`, `0001230` etc.
+//
+// ```
+// // Example1 - all `0`s needs to be used:
+//  103
+// +206
+//  ---
+//  309
+//
+// // Example2 - some `0`s can be ignored (removed):
+//  00103
+// +  206
+//  -----
+//    206
+// ```
+//
+// In the latter example the main column-addition algorithm needs to figure out:
+//
+// * if the addition of two `0`s is happening on a column with padding `0`s
+// * or happening on "valueable" `0`(s) (representing decimal powers).
+//
+// Instead of adding this complication to the main loop, I have decided to trim padding `0`s once the column-addition has completed.
+//
+// ```
